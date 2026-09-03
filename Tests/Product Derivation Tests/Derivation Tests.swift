@@ -19,8 +19,8 @@ struct `Product Derivation Tests` {
         let protocolDeclaration = try #require(
             source.statements.first?.item.as(ProtocolDeclSyntax.self)
         )
-        let analysis = Derivation.Analysis(protocolDeclaration)
-        let declarations = Derivation.peers(of: analysis)
+        let analysis = Product.Analysis(protocolDeclaration)
+        let declarations = Product.Derivation.peers(of: analysis)
         let product = try #require(declarations.first?.as(StructDeclSyntax.self))
 
         #expect(declarations.count == 1)
@@ -35,8 +35,8 @@ struct `Product Derivation Tests` {
         let protocolDeclaration = try #require(
             source.statements.first?.item.as(ProtocolDeclSyntax.self)
         )
-        let analysis = Derivation.Analysis(protocolDeclaration)
-        let declarations = Derivation.peers(of: analysis)
+        let analysis = Product.Analysis(protocolDeclaration)
+        let declarations = Product.Derivation.peers(of: analysis)
         let product = try #require(declarations.first?.as(StructDeclSyntax.self))
 
         #expect(product.name.text == "__Empty")
@@ -61,7 +61,7 @@ struct `Product Derivation Tests` {
         let protocolDeclaration = try #require(
             source.statements.first?.item.as(ProtocolDeclSyntax.self)
         )
-        let analysis = Derivation.Analysis(protocolDeclaration)
+        let analysis = Product.Analysis(protocolDeclaration)
         let function = try #require(analysis.functionCoordinates.first)
 
         #expect(analysis.diagnostics.isEmpty)

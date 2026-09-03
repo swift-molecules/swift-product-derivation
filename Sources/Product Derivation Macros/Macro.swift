@@ -11,13 +11,13 @@ public struct Macro: PeerMacro, ExtensionMacro {
         guard let declaration = declaration.as(ProtocolDeclSyntax.self) else {
             throw MacroExpansionErrorMessage("@Product applies to a protocol declaration only.")
         }
-        let analysis = Derivation.Analysis(declaration)
+        let analysis = Product.Analysis(declaration)
         guard analysis.diagnostics.isEmpty else {
             throw MacroExpansionErrorMessage(
                 "@Product cannot represent every requirement: \(analysis.diagnostics.joined(separator: "; "))."
             )
         }
-        return Derivation.peers(of: analysis)
+        return Product.Derivation.peers(of: analysis)
     }
 
     public static func expansion(
@@ -28,8 +28,8 @@ public struct Macro: PeerMacro, ExtensionMacro {
         in _: some MacroExpansionContext
     ) throws -> [ExtensionDeclSyntax] {
         guard let declaration = declaration.as(ProtocolDeclSyntax.self) else { return [] }
-        let analysis = Derivation.Analysis(declaration)
+        let analysis = Product.Analysis(declaration)
         guard analysis.diagnostics.isEmpty else { return [] }
-        return Derivation.extensions(of: analysis, type: type)
+        return Product.Derivation.extensions(of: analysis, type: type)
     }
 }
