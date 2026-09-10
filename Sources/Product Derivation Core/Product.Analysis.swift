@@ -20,14 +20,13 @@ extension Product {
         public struct Parameter {
             public let declaration: FunctionParameterSyntax
             public let localName: TokenSyntax
-            /// The stored value type, without parameter-passing specifiers.
+
             public let valueType: TypeSyntax
             public let closureType: TypeSyntax
             public let convention: ParameterConvention
             public let forwardingExpression: ExprSyntax
             public let ownedExpression: ExprSyntax
 
-            /// Whether the declaration transfers an owned value into the call.
             public var transfersOwnership: Bool {
                 switch convention {
                 case .consuming, .sending:
